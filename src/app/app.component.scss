@@ -11,31 +11,44 @@
 
   h1 {
     align-self: center;
-    margin: 0 0 10px;
+    margin: 0;
     font-weight: normal;
+    font-size: 35px;
+  }
+
+  >p {
+    font-size: 20px;
+    margin: 15px 0;
+    margin-top: 25px;
+    font-weight: bold;
   }
 
   .line {
-    display: flex;
+    display: grid;
+    grid-template-columns: 130px 1fr;
     align-items: center;
     gap: 10px;
     position: relative;
 
     p {
-      min-width: 100px;
-      font-size: 15px;
+      font-size: 20px;
+      white-space: nowrap;
     }
 
     input {
+      min-width: 0;
       height: 30px;
-      flex: 1;
-      padding-right: 30px;
+      padding: 7px 30px 7px 5px;
+      font-size: 20px;
+      border: 1px solid black;
+      border-radius: 5px;
     }
 
     i {
       font-style: normal;
       position: absolute;
-      right: 5px;
+      right: 10px;
+      top: 19px;
     }
   }
 

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-root',
@@ -11,8 +11,8 @@ export class AppComponent implements OnInit {
   formGroup = new FormGroup({
     cad: new FormControl<number | undefined>(undefined),
     eur: new FormControl<number | undefined>(undefined),
-    tps: new FormControl<number | undefined>(undefined),
-    tvq: new FormControl<number | undefined>(undefined),
+    tps: new FormControl<number | undefined>({value: undefined, disabled: true}),
+    tvq: new FormControl<number | undefined>({value: undefined, disabled: true}),
     cadTtc: new FormControl<number | undefined>(undefined),
     eurTtc: new FormControl<number | undefined>(undefined),
   });
