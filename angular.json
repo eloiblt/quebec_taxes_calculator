@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "conversion": {
+    "taxes": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/conversion",
+            "outputPath": "dist/taxes",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -68,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "conversion:build:production"
+              "browserTarget": "taxes:build:production"
             },
             "development": {
-              "browserTarget": "conversion:build:development"
+              "browserTarget": "taxes:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -79,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "conversion:build"
+            "browserTarget": "taxes:build"
           }
         },
         "test": {
