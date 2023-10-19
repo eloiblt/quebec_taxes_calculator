@@ -1,0 +1,45 @@
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  flex: 1;
+
+  h1 {
+    align-self: center;
+    margin: 0 0 10px;
+    font-weight: normal;
+  }
+
+  .line {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+
+    p {
+      min-width: 100px;
+      font-size: 15px;
+    }
+
+    input {
+      height: 30px;
+      flex: 1;
+      padding-right: 30px;
+    }
+
+    i {
+      font-style: normal;
+      position: absolute;
+      right: 5px;
+    }
+  }
+
+  span {
+    margin: 10px;
+  }
+}
