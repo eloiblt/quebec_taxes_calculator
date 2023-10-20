@@ -1,5 +1,7 @@
 #!/bin/sh
-echo
+echo Building dist folder...
+
 npm run build
 git add .
+
 exit
