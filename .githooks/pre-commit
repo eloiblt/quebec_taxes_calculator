@@ -1,7 +1,0 @@
-#!/bin/sh
-
-echo "Executing pre-push hook, build app into dist folder"
-
-git add .
-ng build
-git add .
