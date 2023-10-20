@@ -19,6 +19,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
+    needs: build
     steps:
       - name: Push generated webpage to another repository
         uses: nkoppel/push-files-to-another-repository@v1.1.2
