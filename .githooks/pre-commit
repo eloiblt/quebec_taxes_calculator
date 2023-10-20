@@ -1,4 +1,5 @@
 #!/bin/sh
 echo
 npm run build
+git add .
 exit
