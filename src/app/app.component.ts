@@ -60,19 +60,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.httpClient
-      .get<{ date: Date; cad: number }>(
-        'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/eur/cad.json'
-      )
-      .subscribe(
-        {
-          next: (res) => {
-            console.log(res);
-            this.exchangeRate = res.cad;
-            localStorage.setItem('exchangeRate', res.cad.toString());
-          }
-        }
-      );
+    setTimeout(() => this.refreshExchangeRate(), 3600000);
+    this.refreshExchangeRate();
 
     this.cad.valueChanges.subscribe((cad) => {
       if (!cad) {
@@ -121,6 +110,21 @@ export class AppComponent implements OnInit {
       this.refreshHt();
       this.refreshTaxes();
     });
+  }
+
+  refreshExchangeRate() {
+    this.httpClient
+      .get<{ date: Date; cad: number }>(
+        'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/eur/cad.json'
+      )
+      .subscribe(
+        {
+          next: (res) => {
+            this.exchangeRate = res.cad;
+            localStorage.setItem('exchangeRate', res.cad.toString());
+          }
+        }
+      );
   }
 
   refreshTaxes() {
