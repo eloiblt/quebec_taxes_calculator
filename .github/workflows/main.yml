@@ -1,0 +1,20 @@
+name: CI - CD
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Push generated webpage to another repository
+        uses: nkoppel/push-files-to-another-repository@1.1.0
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          source-files: 'dist/'
+          destination-username: 'eloiblt'
+          destination-repository: 'eloiblt.github.io'
+          commit-email: 'eloi.bellet@gmail.com'
