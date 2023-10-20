@@ -1,6 +1,18 @@
 {
   "$schema": "./node_modules/@angular/service-worker/config/schema.json",
   "index": "/index.html",
+  "dataGroups": [
+    {
+      "name": "Exchange rate refresh",
+      "urls": ["https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/eur/cad.json"],
+      "cacheConfig": {
+        "strategy": "freshness",
+        "maxAge": "7d",
+        "maxSize": 20,
+        "timeout": "2s"
+      }
+    }
+  ],
   "assetGroups": [
     {
       "name": "app",

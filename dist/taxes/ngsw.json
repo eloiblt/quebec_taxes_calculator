@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1697779379835,
+  "timestamp": 1697821971011,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -13,7 +13,7 @@
       "urls": [
         "/favicon.ico",
         "/index.html",
-        "/main.8793995c32138dac.js",
+        "/main.1acd26d50cfbd821.js",
         "/manifest.webmanifest",
         "/polyfills.698b14702d74c6f5.js",
         "/runtime.44aef77245d4cd10.js",
@@ -42,7 +42,22 @@
       "patterns": []
     }
   ],
-  "dataGroups": [],
+  "dataGroups": [
+    {
+      "name": "Exchange rate refresh",
+      "patterns": [
+        "https:\\/\\/cdn\\.jsdelivr\\.net\\/gh\\/fawazahmed0\\/currency-api@1\\/latest\\/currencies\\/eur\\/cad\\.json"
+      ],
+      "strategy": "freshness",
+      "maxSize": 20,
+      "maxAge": 604800000,
+      "timeoutMs": 2000,
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "version": 1
+    }
+  ],
   "hashTable": {
     "/assets/icons/icon-128x128.png": "336b0b86b66dc6c57773fb973914efb4f1514d25",
     "/assets/icons/icon-144x144.png": "5c981cdba83f1657f4fb77305b9f571ddf8a5fd5",
@@ -54,8 +69,8 @@
     "/assets/icons/icon-72x72.png": "6172d0feed1f2c301d34af37019da4f221c009c3",
     "/assets/icons/icon-96x96.png": "fe9328e25aa696f99314c77b962a9fa56151d4bf",
     "/favicon.ico": "3822a8010344d2b200b43b878b00670bcc2e67f0",
-    "/index.html": "3f7ec33a85a9124b12149b612ed7998b9936d7f6",
-    "/main.8793995c32138dac.js": "21f3fc94da503c7c405887944219f8a2ba58295b",
+    "/index.html": "3f79612bce75d64d5d15dfe430c6cfcb03e067fd",
+    "/main.1acd26d50cfbd821.js": "9c27a0885c11ca380f16c5f6692c389b9f179b74",
     "/manifest.webmanifest": "45e88dbae389ccc0cc2947bc20340df814cbfa7e",
     "/polyfills.698b14702d74c6f5.js": "7a9301e9cf116659369fd8f91df6a4bc0ab083ae",
     "/runtime.44aef77245d4cd10.js": "f3ffb18799c1f040d9835aa4a2aea927efb51890",
