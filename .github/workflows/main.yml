@@ -38,5 +38,4 @@ jobs:
           port: ${{ secrets.VPS_PORT }}
           script: |
             echo ${{ secrets.GITHUB_TOKEN }} | docker login https://ghcr.io -u eloiblt --password-stdin
-            docker pull ghcr.io/qts
-            docker run -d -p 2000:80 ghcr.io/qts
+            docker run -d -p 2000:80 --pull=always ghcr.io/eloiblt/qts:latest
