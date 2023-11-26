@@ -1,0 +1,41 @@
+name: CI - CD
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Login to GitHub Container Registry
+        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login https://ghcr.io -u eloiblt --password-stdin
+
+      - name: Build the stack
+        working-directory: .
+        run: docker build -t ghcr.io/qts .
+
+      - name: Push the stack
+        working-directory: .
+        run: docker push ghcr.io/qts
+
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: docker login, pull, and up
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_IP }}
+          username: ${{ secrets.VPS_USERNAME }}
+          password: ${{ secrets.VPS_PWD }}
+          port: ${{ secrets.VPS_PORT }}
+          script: |
+            echo ${{ secrets.GITHUB_TOKEN }} | docker login https://ghcr.io -u eloiblt --password-stdin
+            docker pull ghcr.io/qts
+            docker run -d -p 2000:80 ghcr.io/qts
