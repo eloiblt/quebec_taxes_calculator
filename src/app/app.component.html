@@ -1,7 +1,7 @@
 <form [formGroup]="formGroup" class="app-container">
   <h1>Quebec taxes calculator</h1>
 
-  <p *ngIf="exchangeRate">1€ = {{ round(exchangeRate) }}CAD</p>
+  <p *ngIf="exchangeRate">1€ = {{ round(exchangeRate) }}CAD <span>(updated {{ updatedDate | date:"MMM dd, yyyy 'at' hh:mm a" }})</span></p>
   <p *ngIf="exchangeRateError">Aucun taux de change configuré. Veuillez vous reconnecter</p>
 
   <div class="line">

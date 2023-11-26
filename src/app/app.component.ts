@@ -29,6 +29,7 @@ export class AppComponent implements OnInit {
   tpsValue = 0.05;
   tvqValue = 0.09975;
   exchangeRateError = false;
+  updatedDate?: Date;
 
   get cad() {
     return this.formGroup.get('cad')!;
@@ -113,15 +114,22 @@ export class AppComponent implements OnInit {
   }
 
   refreshExchangeRate() {
+    const date = new Date(new Date().getTime() - (new Date().getTimezoneOffset() * 60 * 1000));
+
     this.httpClient
       .get<{ date: Date; cad: number }>(
-        'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/eur/cad.json'
+        `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/${date.toISOString().split('T')[0]}/currencies/eur/cad.json`
       )
       .subscribe(
         {
           next: (res) => {
             this.exchangeRate = res.cad;
             localStorage.setItem('exchangeRate', res.cad.toString());
+            this.updatedDate = new Date();
+          },
+          error: () => {
+            const oldValue = localStorage.getItem('exchangeRate');
+            if (oldValue) this.exchangeRate = +oldValue;
           }
         }
       );
