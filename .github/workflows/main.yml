@@ -16,11 +16,11 @@ jobs:
 
       - name: Build the stack
         working-directory: .
-        run: docker build -t ghcr.io/qts .
+        run: docker build -t ghcr.io/eloiblt/qts:latest .
 
       - name: Push the stack
         working-directory: .
-        run: docker push ghcr.io/qts
+        run: docker push ghcr.io/eloiblt/qts:latest
 
   deploy:
     needs: build-and-push
