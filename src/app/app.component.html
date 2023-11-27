@@ -5,40 +5,40 @@
   <p *ngIf="exchangeRateError">Aucun taux de change configuré. Veuillez vous reconnecter</p>
 
   <div class="line">
-    <p>CAD</p>
-    <input type="number" formControlName="cad">
+    <label for="cad">CAD</label>
+    <input type="number" id="cad" formControlName="cad">
     <i (click)="cad.reset()">&#x2716;</i>
   </div>
 
   <div class="line">
-    <p>EUR</p>
-    <input type="number" formControlName="eur">
+    <label for="eur">EUR</label>
+    <input type="number" id="eur" formControlName="eur">
     <i (click)="eur.reset()">&#x2716;</i>
   </div>
 
   <span></span>
 
   <div class="line">
-    <p>TPS (5%)</p>
-    <input type="number" style="caret-color: transparent" readonly formControlName="tps">
+    <label for="tps">TPS (5%)</label>
+    <input type="number" id="tps" style="caret-color: transparent" readonly formControlName="tps">
   </div>
 
   <div class="line">
-    <p>TVQ (9.975%)</p>
-    <input type="number" style="caret-color: transparent" readonly formControlName="tvq">
+    <label for="tvq">TVQ (9.975%)</label>
+    <input type="number" id="tvq" style="caret-color: transparent" readonly formControlName="tvq">
   </div>
 
   <span></span>
 
   <div class="line">
-    <p>CAD TTC</p>
-    <input type="number" formControlName="cadTtc">
+    <label for="cadTtc">CAD TTC</label>
+    <input type="number" id="cadTtc" formControlName="cadTtc">
     <i (click)="cadTtc.reset()">&#x2716;</i>
   </div>
 
   <div class="line">
-    <p>EUR TTC</p>
-    <input type="number" formControlName="eurTtc">
+    <label for="eurTtc">EUR TTC</label>
+    <input type="number" id="eurTtc" formControlName="eurTtc">
     <i (click)="eurTtc.reset()">&#x2716;</i>
   </div>
 </form>
