@@ -117,14 +117,14 @@ export class AppComponent implements OnInit {
     const date = new Date(new Date().getTime() - (new Date().getTimezoneOffset() * 60 * 1000));
 
     this.httpClient
-      .get<{ date: Date; cad: number }>(
-        `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/${date.toISOString().split('T')[0]}/currencies/eur/cad.json`
+      .get<{ date: Date; eur: any }>(
+        `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@${date.toISOString().split('T')[0]}/v1/currencies/eur.json`
       )
       .subscribe(
         {
           next: (res) => {
-            this.exchangeRate = res.cad;
-            localStorage.setItem('exchangeRate', res.cad.toString());
+            this.exchangeRate = res['eur']['cad'];
+            localStorage.setItem('exchangeRate', res['eur']['cad'].toString());
             this.updatedDate = new Date();
           },
           error: () => {
