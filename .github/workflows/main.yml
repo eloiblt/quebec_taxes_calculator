@@ -2,32 +2,36 @@ name: CI - CD
 
 on:
   push:
-    branches: [master]
-  workflow_dispatch:
+    tags:
+      - 'v*'
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Login to GitHub Container Registry
         run: echo ${{ secrets.GITHUB_TOKEN }} | docker login https://ghcr.io -u eloiblt --password-stdin
 
+      - name: Extract version
+        id: version
+        run: echo "TAG=${GITHUB_REF##*/}" >> "$GITHUB_OUTPUT"
+
       - name: Build the stack
         working-directory: .
-        run: docker build -t ghcr.io/eloiblt/qts:latest .
+        run: docker build -t ghcr.io/eloiblt/qts:${{ steps.version.outputs.TAG }} .
 
       - name: Push the stack
         working-directory: .
-        run: docker push ghcr.io/eloiblt/qts:latest
+        run: docker push ghcr.io/eloiblt/qts:${{ steps.version.outputs.TAG }}
 
   deploy:
     needs: build-and-push
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: docker login, pull, and up
         uses: appleboy/ssh-action@master
@@ -38,6 +42,6 @@ jobs:
           port: ${{ secrets.VPS_PORT }}
           script: |
             echo ${{ secrets.GITHUB_TOKEN }} | docker login https://ghcr.io -u eloiblt --password-stdin
-            docker stop qts
-            docker rm qts
-            docker run -d -p 127.0.0.1:2000:80 --pull=always --restart=always --name=qts ghcr.io/eloiblt/qts:latest
+            cd ~/my-server/qts
+            docker-compose pull
+            docker-compose up -d
