@@ -9,6 +9,8 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
     permissions: write-all
+    outputs:
+      image_tag: ${{ steps.version.outputs.TAG }}
     steps:
       - uses: actions/checkout@v3
 
@@ -43,6 +45,6 @@ jobs:
           script: |
             echo ${{ secrets.GITHUB_TOKEN }} | docker login https://ghcr.io -u eloiblt --password-stdin
             cd ~/my-server/qts
-            echo "IMAGE_TAG=${{ steps.version.outputs.TAG }}" > .env
+            echo "IMAGE_TAG=${{ needs.build-and-push.outputs.image_tag }}" > .env
             docker compose pull
             docker compose up -d
