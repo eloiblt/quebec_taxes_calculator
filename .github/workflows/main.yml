@@ -43,5 +43,6 @@ jobs:
           script: |
             echo ${{ secrets.GITHUB_TOKEN }} | docker login https://ghcr.io -u eloiblt --password-stdin
             cd ~/my-server/qts
+            echo "IMAGE_TAG=${{ steps.version.outputs.TAG }}" > .env
             docker compose pull
             docker compose up -d
