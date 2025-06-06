@@ -13,7 +13,7 @@ jobs:
     outputs:
       image_tag: ${{ steps.version.outputs.TAG }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Login to GitHub Container Registry
         run: echo ${{ secrets.GITHUB_TOKEN }} | docker login https://ghcr.io -u eloiblt --password-stdin
@@ -23,18 +23,16 @@ jobs:
         run: echo "TAG=${GITHUB_REF##*/}" >> "$GITHUB_OUTPUT"
 
       - name: Build the stack
-        working-directory: .
         run: docker build -t ghcr.io/eloiblt/qts:${{ steps.version.outputs.TAG }} .
 
       - name: Push the stack
-        working-directory: .
         run: docker push ghcr.io/eloiblt/qts:${{ steps.version.outputs.TAG }}
 
   deploy:
     needs: build-and-push
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: docker login, pull, and up
         uses: appleboy/ssh-action@master
