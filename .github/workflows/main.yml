@@ -46,4 +46,4 @@ jobs:
             cd ~/my-server/quebex-taxes-calculator
             echo "IMAGE_TAG=${{ needs.build-and-push.outputs.image_tag }}" > .env
             docker compose pull
-            docker compose up -d
+            docker compose up -d --force-recreate
