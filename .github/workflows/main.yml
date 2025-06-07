@@ -23,10 +23,10 @@ jobs:
         run: echo "TAG=${GITHUB_REF##*/}" >> "$GITHUB_OUTPUT"
 
       - name: Build the stack
-        run: docker build -t ghcr.io/eloiblt/qts:${{ steps.version.outputs.TAG }} .
+        run: docker build -t ghcr.io/eloiblt/quebex-taxes-calculator:${{ steps.version.outputs.TAG }} .
 
       - name: Push the stack
-        run: docker push ghcr.io/eloiblt/qts:${{ steps.version.outputs.TAG }}
+        run: docker push ghcr.io/eloiblt/quebex-taxes-calculator:${{ steps.version.outputs.TAG }}
 
   deploy:
     needs: build-and-push
@@ -43,7 +43,7 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
             echo ${{ secrets.GITHUB_TOKEN }} | docker login https://ghcr.io -u eloiblt --password-stdin
-            cd ~/my-server/qts
+            cd ~/my-server/quebex-taxes-calculator
             echo "IMAGE_TAG=${{ needs.build-and-push.outputs.image_tag }}" > .env
             docker compose pull
             docker compose up -d
