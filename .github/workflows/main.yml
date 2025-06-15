@@ -51,14 +51,15 @@ jobs:
             docker compose up -d --force-recreate
 
   notify-telegram:
-    needs: deploy
+    needs: [build-and-push, deploy]
+    if: failure()
     runs-on: ubuntu-latest
     environment: Production
     steps:
       - name: Send Telegram notification
         run: |
           TEXT=$(cat <<EOF
-          *✅ Quebec Taxes Calcular déployé avec succès ✅*
+          *❌ Erreur lors du déploiement de Quebec Taxes Calculator ❌*
 
           *Workflow*: [${{ github.workflow }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
           *Repository*: \`${{ github.repository }}\`
