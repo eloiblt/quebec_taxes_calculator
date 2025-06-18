@@ -5,6 +5,10 @@ on:
     tags:
       - '*'
   workflow_dispatch:
+    inputs:
+      version:
+        description: "Version (optional if no tag)"
+        required: false
 
 jobs:
   build-and-push:
@@ -21,7 +25,17 @@ jobs:
 
       - name: Extract version
         id: version
-        run: echo "TAG=${GITHUB_REF##*/}" >> "$GITHUB_OUTPUT"
+        run: |
+          if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
+            echo "TAG=${GITHUB_REF##*/}" >> "$GITHUB_OUTPUT"
+          elif [[ -n "${{ github.event.inputs.version }}" ]]; then
+            echo "TAG=${{ github.event.inputs.version }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "TAG=latest" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Print version
+        run: echo "Using version ${{ steps.version.outputs.TAG }}"
 
       - name: Build the stack
         run: docker build -t ghcr.io/eloiblt/quebex-taxes-calculator:${{ steps.version.outputs.TAG }} .
